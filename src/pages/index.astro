@@ -1,11 +1,38 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import QRCodeGenerator from "@components/QrCodeGenerator";
+import { Button } from "@components/ui/button";
+import Welcome from "@components/Welcome.astro";
+import Layout from "@layouts/Layout.astro";
+import { dataGlobal } from "@utils/dataGlobal";
+import { NightwindInit } from "@utils/nightwind";
+import { SwitchDarkMod } from "@sections/SwitchDarMod";
+
+const { TITLE, THEME_COLOR } = dataGlobal;
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title=`${TITLE}` themeColor={`${THEME_COLOR}`}>
+  <div class="bg-primary-100 gap-2">
+    <header
+      class="fixed flex w-full items-center justify-center py-8 bg-primary-200"
+    >
+      <dv class="flex w-full justify-around gap-4 px-4">
+        <SwitchDarkMod client:only />
+      </dv>
+    </header>
+    <h1
+      class="text-6xl font-bold mb-8 text-center text-black drop-shadow-lg animate-bounce"
+    >
+      QR Mágico
+    </h1>
+    <main class="w-100 flex h-screen items-center justify-center">
+      <QRCodeGenerator client:only />
+      <!-- <SavedQRCodes /> -->
+
+      <Welcome />
+      <NightwindInit client:only />
+    </main>
+  </div>
 </Layout>
