@@ -1,0 +1,25 @@
+---
+import { SwitchDarkMod } from "@sections/SwitchDarMod";
+import { dataGlobal } from "@utils/dataGlobal";
+import { UserIcon } from "lucide-preact";
+---
+
+<header
+  class="bg-prymary-400 w-full flex-col items-center justify-center bg-gradient-to-r py-8"
+>
+  <div class="flex justify-between gap-4 px-4">
+    <SwitchDarkMod client:only="preact" />
+    <button class="primary-button">
+      <UserIcon className="icon" />
+      Sign in
+    </button>
+  </div>
+  <h1 class="title">
+    {dataGlobal.title}
+  </h1>
+  <div>
+    <p class="subtitle">
+      {dataGlobal.DESCRIPTION}
+    </p>
+  </div>
+</header>

@@ -1,6 +1,6 @@
 export const dataGlobal = {
-  TITLE: "QR Mágico - Generador de Códigos QR",
+  TITLE: "QRTUAPP - Generador de Códigos QR",
+  title: "QRTUAPP",
   THEME_COLOR: "#ffffff",
-  description:
-    "Generador de Códigos QR para tus Mágicos. ¡Crea tu propio QR Mágico y guarda tus códigos QR en tu colección mágica!",
+  DESCRIPTION: "Simple y fácil de usar Generador de QR y URL short",
 };

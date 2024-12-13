@@ -1,0 +1,22 @@
+---
+import QRCodeGenerator from "@components/QrCodeGenerator";
+import Welcome from "@components/Welcome.astro";
+import { QrCode, Link } from "lucide-preact";
+---
+
+<main class="main">
+  <div class="main-card">
+    <div class="card-header">
+      <QrCode class="icon" />
+      <h1>Generate QR Code</h1>
+    </div>
+    <QRCodeGenerator client:only="preact" />
+  </div>
+  <div class="main-card">
+    <div class="card-header">
+      <Link class="icon" />
+      <h1>Shorten URL</h1>
+    </div>
+    <Welcome />
+  </div>
+</main>
