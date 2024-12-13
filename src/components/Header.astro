@@ -1,14 +1,14 @@
 ---
-import { SwitchDarkMod } from "@sections/SwitchDarMod";
 import { dataGlobal } from "@utils/dataGlobal";
 import { UserIcon } from "lucide-preact";
+import SwitchDarMod from "@sections/SwitchDarMod.astro";
 ---
 
 <header
   class="bg-prymary-400 w-full flex-col items-center justify-center bg-gradient-to-r py-8"
 >
   <div class="flex justify-between gap-4 px-4">
-    <SwitchDarkMod client:only="preact" />
+    <SwitchDarMod />
     <button class="primary-button">
       <UserIcon className="icon" />
       Sign in

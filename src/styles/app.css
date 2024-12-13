@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply from-primary-100 to-primary-200 relative min-h-screen bg-gradient-to-br p-6;
+  @apply from-blue-500 to-blue-200 relative min-h-screen bg-gradient-to-br p-6;
 }
 
 footer {
-  @apply bg-primary-500 w-full flex-col items-center justify-center bg-gradient-to-r py-8;
+  @apply bg-blue-500 w-full flex-col items-center justify-center bg-gradient-to-r py-8;
 }
 
 .footer-content {
@@ -23,19 +23,19 @@ footer {
 }
 
 .footer-text {
-  @apply text-primary-500 text-center text-xl font-bold;
+  @apply text-blue-500 text-center text-xl font-bold;
 }
 
 .title {
-  @apply text-primary-500 animate-bounce text-center text-6xl font-bold drop-shadow-lg;
+  @apply text-blue-500 animate-bounce text-center text-6xl font-bold drop-shadow-lg;
 }
 
 .subtitle {
-  @apply text-primary-500 text-center text-xl font-bold;
+  @apply text-blue-500 text-center text-xl font-bold;
 }
 
 .primary-button {
-  @apply bg-secondary-50 text-primary-500 flex items-center justify-center rounded-full px-4 py-2 text-2xl;
+  @apply text-blue-500 bg-purple-50 flex items-center justify-center rounded-full px-4 py-2 text-2xl;
 }
 
 .main {
@@ -43,11 +43,19 @@ footer {
 }
 
 .main-card {
-  @apply bg-secondary-50 mb-4 w-full min-w-min flex-1 gap-2 rounded-md p-10 shadow-lg;
+  @apply bg-purple-50 mb-4 w-full min-w-min flex-1 gap-2 rounded-md p-10 shadow-lg dark:bg-purple-900;
 }
 .icon {
-  @apply mr-2 h-6 w-6 stroke-primary-500;
+  @apply stroke-blue-500 mr-2 h-6 w-6;
 }
 .card-header {
-  @apply text-primary-500 mb-4 flex items-center gap-2 text-2xl font-bold;
+  @apply text-blue-500 mb-4 flex items-center gap-2 text-2xl font-bold;
+}
+
+.qr-code-container {
+  @apply flex items-center justify-center gap-4 sm:flex-col md:flex-col lg:flex-row;
+}
+
+.qr-code-view {
+  @apply bg-gray-500 border-blue-300 items-center justify-center rounded-md border-2 border-solid p-10 shadow-sm;
 }
