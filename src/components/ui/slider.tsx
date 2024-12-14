@@ -30,7 +30,7 @@ export const Slider: FC<Props> = ({
       <p>{title}</p>
       <div class="flex items-center justify-center gap-4">
         <input
-          class="qr-code-slider"
+          class="slider"
           id={id}
           aria-orientation="horizontal"
           type="range"
@@ -41,7 +41,7 @@ export const Slider: FC<Props> = ({
           onChange={onChange}
         />
         <p class="flex-1 items-center justify-center gap-2">
-          <span class="text-primary-500 text-center font-bold">
+          <span class="slider-value-text">
             {valuec}
             {prefix}
           </span>

@@ -6,45 +6,49 @@ import {
   onImageSizeChange,
   onMaginImageChange,
 } from "@utils/qrOptions";
+import { Trash } from "lucide-preact";
 import { Slider } from "./ui/slider";
-import { Button } from "./ui/button";
-import { Delete, Trash } from "lucide-preact";
 
 export const ImageOptionsSections = () => {
   const { image, imageOptions } = useStore($qrOptions);
   return (
-    <section class="flex flex-col gap-4">
-      <h3 class="text-primary-500 text-center font-bold">IMAGEN</h3>
-      <div class="flex-row gap-4">
-        <input
-          type="file"
-          onChange={onFileChange}
-          value={image ?? ""}
-          class="flex-1 rounded-md border px-4 py-2 focus:ring-primary-400 focus:outline-none focus:ring-2"
-        />
+    <section class="options-image-section">
+      <div class="flex flex-row items-center justify-between gap-4">
+        <form class="flex">
+          <label for="file-input" class="sr-only">
+            Choose file
+          </label>
+          <input
+            type="file"
+            onChange={onFileChange}
+            value={image ?? ""}
+            name="file-input"
+            id="file-input"
+            class="imput-file overflow-hidden"
+          />
+        </form>
         {image && (
-          <button
-            class="primary-button flex-1"
-            onClick={() => onFileChange(null)}
-          >
+          <button class="btn-ghost" onClick={() => onFileChange(null)}>
             <Trash className="icon" />
             Eliminar
           </button>
         )}
       </div>
       {image && (
-        <>
+        <div class="flex flex-col gap-4">
           <div>
             <input
               type="checkbox"
+              class="checkbox"
+              id="hs-default-checkbox"
               onChange={() => hideBackgroundDots()}
               checked={imageOptions?.hideBackgroundDots}
             />
-            <span class="text-primary-500 text-center font-bold">
+            <label for="hs-default-checkbox" class="checkbox-label">
               {imageOptions?.hideBackgroundDots
                 ? "Hide Background Dots"
                 : "Background Dots"}
-            </span>
+            </label>
           </div>
           <Slider
             id="basic-range-slider-borderimage"
@@ -65,7 +69,7 @@ export const ImageOptionsSections = () => {
             onChange={onImageSizeChange}
             prefix="%"
           />
-        </>
+        </div>
       )}
     </section>
   );

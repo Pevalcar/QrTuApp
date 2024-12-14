@@ -1,7 +1,7 @@
 ---
-import { dataGlobal } from "@utils/dataGlobal";
-import { UserIcon } from "lucide-preact";
+import { LoginButton } from "@components/LoginButton";
 import SwitchDarMod from "@sections/SwitchDarMod.astro";
+import { dataGlobal } from "@utils/dataGlobal";
 ---
 
 <header
@@ -9,10 +9,7 @@ import SwitchDarMod from "@sections/SwitchDarMod.astro";
 >
   <div class="flex justify-between gap-4 px-4">
     <SwitchDarMod />
-    <button class="primary-button">
-      <UserIcon className="icon" />
-      Sign in
-    </button>
+    <LoginButton client:only="preact" />
   </div>
   <h1 class="title">
     {dataGlobal.title}

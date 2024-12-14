@@ -1,19 +1,27 @@
 "use client";
 
+import { useStore } from "@nanostores/preact";
+import {
+  $qrOptions,
+  onMarginChange,
+  onMarginInputChange,
+  onSizeChange,
+} from "@utils/qrOptions";
+import { Minus, PlusIcon, Save } from "lucide-preact";
 import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import QRCodeStyling, {
   type DotType,
   type FileExtension,
 } from "qr-code-styling";
-import { Slider } from "./ui/slider";
-import { $qrOptions, hideBackgroundDots } from "@utils/qrOptions";
-import { useStore } from "@nanostores/preact";
+import { BackGroundSections } from "./BackGroundSections";
 import { ImageOptionsSections } from "./ImageOptionsSections";
+import { Seccion } from "./Section";
+import { Slider } from "./ui/slider";
 
 const qrCode = new QRCodeStyling($qrOptions.get());
 
 export default function App() {
-  const [fileExt, setFileExt] = useState<FileExtension>("png");
+  const [fileExt, setFileExt] = useState<FileExtension>("webp");
   const [dotType, setDotType] = useState<DotType>("classy");
   const [colorDot, setColorDot] = useState("#333333");
   const [colorBg, setColorBg] = useState("#FFFFFF");
@@ -41,14 +49,12 @@ export default function App() {
   }, []);
 
   const onExtensionChange = useCallback((event: any) => {
+    event.preventDefault();
     setFileExt(event.target.value);
   }, []);
 
   const onDotTypeChange = useCallback((event: any) => {
     setDotType(event.target.value);
-  }, []);
-  const onSizeChange = useCallback((event: any) => {
-    setSize(Number(event.target.value));
   }, []);
 
   const onColorBgChange = useCallback((event: any) => {
@@ -58,47 +64,79 @@ export default function App() {
   const onColorDotChange = useCallback((event: any) => {
     setColorDot(event.target.value);
   }, []);
-  const onMarginChange = useCallback((event: any) => {
-    setMargin(Number(event.target.value));
-  }, []);
 
   const onDownloadClick = useCallback(() => {
     qrCode.download({
       extension: fileExt,
     });
-  }, []);
+  }, [fileExt]);
 
   return (
-    <div class="qr-code-container hs-dark-mode">
-      <div ref={ref} class="qr-code-view" />
-      <div class="flex flex-col gap-4">
-        <input
-          value={options.data}
-          onChange={onUrlChange}
-          class="border-primary-200 mr-6 w-full flex-1 rounded-md border px-4 py-2 focus:ring-primary-400 focus:outline-none focus:ring-2"
-          data-hs-theme-switch=""
+    <div class="qr-code-container">
+      <div class="mx-auto w-full">
+        <div ref={ref} class="qr-code-view" />
+      </div>
+
+      <div class="w-full">
+        <hr class="divider" />
+        <input value={options.data} onChange={onUrlChange} class="input" />
+        <Slider
+          id="slider-size"
+          title="Tamaño"
+          min="1"
+          max="300"
+          step="1"
+          value={options.width ?? 0}
+          onChange={onSizeChange}
+          prefix="px"
         />
-        <ImageOptionsSections />
-        <div style={styles.inputWrapper}>
-          <input
-            type="range"
-            min="100"
-            max="300"
-            value={size}
-            onChange={onSizeChange}
-            class="qr-code-slider"
-            style={styles.inputBox}
-          />
-          <p>
-            <span style={styles.inputBox}>{size}</span>
-          </p>
-          <select onChange={onExtensionChange} value={fileExt}>
-            <option value="png">PNG</option>
-            <option value="jpeg">JPEG</option>
-            <option value="webp">WEBP</option>
-            <option value="svg">SVG</option>
-          </select>
-          <select onChange={onDotTypeChange} value={dotType}>
+        <div
+          class="inline-block w-fit rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-900"
+          data-hs-input-number=""
+        >
+          <p>Margen</p>
+          <div class="flex items-center gap-x-1.5">
+            <button
+              type="button"
+              class="inline-flex size-6 items-center justify-center gap-x-2 rounded-md border border-gray-200 bg-white text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+              onMouseDown={() => onMarginChange(-1)}
+              aria-label="Decrease"
+              data-hs-input-number-decrement=""
+            >
+              <Minus className="icon" />
+            </button>
+            <input
+              class="w-6 border-0 bg-transparent p-0 text-center text-gray-800 focus:ring-0 dark:text-white [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              style="-moz-appearance: textfield;"
+              type="number"
+              aria-roledescription="Number field"
+              value={options.margin ?? 0}
+              data-hs-input-number-input=""
+              onChange={onMarginInputChange}
+            />
+            <button
+              type="button"
+              class="inline-flex size-6 items-center justify-center gap-x-2 rounded-md border border-gray-200 bg-white text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+              onClick={() => onMarginChange(1)}
+              aria-label="Increase"
+              data-hs-input-number-increment=""
+            >
+              <PlusIcon class="icon" />
+            </button>
+          </div>
+        </div>
+        <Seccion title="IMAGEN" size="md">
+          <ImageOptionsSections />
+        </Seccion>
+        <Seccion title="BACKGROUND" size="sm">
+          <BackGroundSections />
+        </Seccion>
+        <div>
+          <select
+            onChange={onDotTypeChange}
+            value={dotType}
+            class="select-drop-down"
+          >
             {/* creacr iconos yque sea un selector multiple donde tenga el ejemplo a el lado dew cada uno de los iconos */}
             <option value="dot">Dot</option>
             <option value="rounded">Rounded</option>
@@ -107,7 +145,6 @@ export default function App() {
             <option value="square">Square</option>
             <option value="extra-rounded">Extra Rounded</option>
           </select>
-          <button onClick={onDownloadClick}>Download</button>
         </div>
         <input
           value={colorDot}
@@ -115,20 +152,26 @@ export default function App() {
           style={styles.inputBox}
           type="color"
         />
-        <input
-          value={colorBg}
-          onChange={onColorBgChange}
-          style={styles.inputBox}
-          type="color"
-        />
-        <input
-          type="number"
-          min="0"
-          max="100"
-          value={margin}
-          onChange={onMarginChange}
-          style={styles.inputBox}
-        />
+
+        <section class="flex flex-row gap-4">
+          <button
+            class="btn-solid flex flex-grow items-center justify-center text-center"
+            onClick={onDownloadClick}
+          >
+            <Save />
+            Download
+          </button>
+          <select
+            onChange={onExtensionChange}
+            value={fileExt}
+            class="select-drop-down flex-1"
+          >
+            <option value="png">PNG</option>
+            <option value="jpeg">JPEG</option>
+            <option value="webp">WEBP</option>
+            <option value="svg">SVG</option>
+          </select>
+        </section>
       </div>
     </div>
   );
