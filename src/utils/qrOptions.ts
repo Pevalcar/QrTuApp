@@ -143,3 +143,127 @@ export const onColorBgChange = (event: any) => {
   });
   updateQrCode();
 };
+
+export const onRoundChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    backgroundOptions: {
+      ...$qrOptions.get().backgroundOptions,
+      round: Number(event.target.value),
+    },
+  });
+  updateQrCode();
+};
+
+export const setGradiente = (color: any | undefined) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    backgroundOptions: {
+      ...$qrOptions.get().backgroundOptions,
+      gradient: color ?? undefined,
+    },
+  });
+  updateQrCode();
+};
+
+export const onTypeGradeiveChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    backgroundOptions: {
+      ...$qrOptions.get().backgroundOptions,
+      gradient: {
+        ...$qrOptions.get().backgroundOptions?.gradient,
+        type: event.target.value,
+        colorStops: $qrOptions.get().backgroundOptions?.gradient
+          ?.colorStops ?? [
+          {
+            offset: 0,
+            color: "#ffffff",
+          },
+          {
+            offset: 100,
+            color: "onRotationChangeInput",
+          },
+        ],
+      },
+    },
+  });
+  updateQrCode();
+};
+
+export const onFirstGradientColorChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    backgroundOptions: {
+      ...$qrOptions.get().backgroundOptions,
+      gradient: {
+        ...$qrOptions.get().backgroundOptions?.gradient,
+        type: $qrOptions.get().backgroundOptions?.gradient?.type ?? "linear",
+        colorStops: [
+          {
+            offset: 0,
+            color: event.target.value,
+          },
+          {
+            offset: 1,
+            color:
+              $qrOptions.get().backgroundOptions?.gradient?.colorStops[1]
+                .color ?? "blue",
+          },
+        ],
+      },
+    },
+  });
+  updateQrCode();
+};
+
+export const onSecondGradientColorChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    backgroundOptions: {
+      ...$qrOptions.get().backgroundOptions,
+      gradient: {
+        ...$qrOptions.get().backgroundOptions?.gradient,
+        type: $qrOptions.get().backgroundOptions?.gradient?.type ?? "linear",
+        colorStops: [
+          {
+            offset: 0,
+            color:
+              $qrOptions.get().backgroundOptions?.gradient?.colorStops[0]
+                .color ?? "blue",
+          },
+          {
+            offset: 1,
+            color: event.target.value,
+          },
+        ],
+      },
+    },
+  });
+  updateQrCode();
+};
+
+export const onRotationChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    backgroundOptions: {
+      ...$qrOptions.get().backgroundOptions,
+      gradient: {
+        type: $qrOptions.get().backgroundOptions?.gradient?.type ?? "linear",
+        colorStops: $qrOptions.get().backgroundOptions?.gradient
+          ?.colorStops ?? [
+          {
+            offset: 0,
+            color: "#ffffff",
+          },
+          {
+            offset: 100,
+            color: "blue",
+          },
+        ],
+        rotation: (Math.PI * Number(event)) / 180,
+      },
+    },
+  });
+  updateQrCode();
+};

@@ -4,13 +4,11 @@ import SwitchDarMod from "@sections/SwitchDarMod.astro";
 import { dataGlobal } from "@utils/dataGlobal";
 ---
 
-<header
-  class="bg-prymary-400 w-full flex-col items-center justify-center bg-gradient-to-r py-8"
->
-  <div class="flex justify-between gap-4 px-4">
+<header class="w-full flex-col items-center justify-center py-8">
+  <nav class="flex justify-between gap-4 px-4">
     <SwitchDarMod />
     <LoginButton client:only="preact" />
-  </div>
+  </nav>
   <h1 class="title">
     {dataGlobal.title}
   </h1>

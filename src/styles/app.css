@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply container relative min-h-screen bg-gradient-to-br from-blue-500 to-blue-200 p-6 dark:from-blue-900 dark:to-blue-800;
+  @apply h-auto w-auto bg-gradient-to-br from-blue-500 to-blue-200 p-6 dark:from-blue-900 dark:to-blue-800;
 }
 
 .input {

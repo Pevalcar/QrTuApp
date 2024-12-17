@@ -128,30 +128,35 @@ export default function App() {
         <Seccion title="IMAGEN" size="md">
           <ImageOptionsSections />
         </Seccion>
-        <Seccion title="BACKGROUND" size="sm">
+        <Seccion
+          title="BACKGROUND"
+          size={options.backgroundOptions?.gradient ? "md" : "sm"}
+        >
           <BackGroundSections />
         </Seccion>
-        <div>
-          <select
-            onChange={onDotTypeChange}
-            value={dotType}
-            class="select-drop-down"
-          >
-            {/* creacr iconos yque sea un selector multiple donde tenga el ejemplo a el lado dew cada uno de los iconos */}
-            <option value="dot">Dot</option>
-            <option value="rounded">Rounded</option>
-            <option value="classy">Classy</option>
-            <option value="classy-rounded">Classy Rounded</option>
-            <option value="square">Square</option>
-            <option value="extra-rounded">Extra Rounded</option>
-          </select>
-        </div>
-        <input
-          value={colorDot}
-          onChange={onColorDotChange}
-          style={styles.inputBox}
-          type="color"
-        />
+        <Seccion title="PUNTOS" size="sm">
+          <div>
+            <select
+              onChange={onDotTypeChange}
+              value={dotType}
+              class="select-drop-down"
+            >
+              {/* creacr iconos yque sea un selector multiple donde tenga el ejemplo a el lado dew cada uno de los iconos */}
+              <option value="dot">Dot</option>
+              <option value="rounded">Rounded</option>
+              <option value="classy">Classy</option>
+              <option value="classy-rounded">Classy Rounded</option>
+              <option value="square">Square</option>
+              <option value="extra-rounded">Extra Rounded</option>
+            </select>
+          </div>
+          <input
+            value={colorDot}
+            onChange={onColorDotChange}
+            style={styles.inputBox}
+            type="color"
+          />
+        </Seccion>
 
         <section class="flex flex-row gap-4">
           <button

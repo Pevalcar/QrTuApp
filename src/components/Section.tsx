@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const Seccion: FC<Props> = ({ children, title, size }) => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const altura =
     size === "sm" ? "h-[200px]" : size === "md" ? "h-[300px]" : "h-[400px]";

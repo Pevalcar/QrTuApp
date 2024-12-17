@@ -1,4 +1,6 @@
+import type { JSXInternal } from "node_modules/preact/src/jsx";
 import type { FC } from "preact/compat";
+import { useCallback, useState } from "preact/compat";
 
 interface Props {
   value: number;
@@ -23,8 +25,12 @@ export const Slider: FC<Props> = ({
   prefix,
   class: clase,
 }) => {
-  const valuec = prefix === "%" ? value * 100 : value;
+  const [internalValue, setInternalValue] = useState(value);
 
+  const onChangeInternal = (event: any) => {
+    onChange(event);
+    setInternalValue(event.target?.value);
+  };
   return (
     <div class={"flex-col items-center justify-center gap-4" + clase}>
       <p>{title}</p>
@@ -38,11 +44,11 @@ export const Slider: FC<Props> = ({
           max={max}
           step={step}
           value={value}
-          onChange={onChange}
+          onChange={(event) => onChangeInternal(event)}
         />
         <p class="flex-1 items-center justify-center gap-2">
           <span class="slider-value-text">
-            {valuec}
+            {prefix === "%" ? internalValue * 100 : internalValue}
             {prefix}
           </span>
         </p>
