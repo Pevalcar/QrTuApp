@@ -27,8 +27,11 @@ export const Seccion: FC<Props> = ({ children, title, size }) => {
   return (
     <div class="w-full rounded-md border border-blue-500 p-4 dark:border-neutral-700 dark:bg-neutral-900">
       <div class="flex flex-row items-center justify-between gap-4">
-        <h3 class="subtitle">{title}</h3>
-        <button class="btn-ghost" onClick={() => handleClick()}>
+        <button
+          class="btn-ghost flex w-full flex-row items-center justify-between gap-4"
+          onClick={() => handleClick()}
+        >
+          <h3 class="subtitle">{title}</h3>
           {show ? (
             <ArrowBigUpDashIcon className="icon" />
           ) : (

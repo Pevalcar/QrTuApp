@@ -19,6 +19,9 @@ import { Slider } from "./ui/slider";
 
 import type { ui } from "@i18n/ui";
 import { useTranslations } from "../i18n/utils";
+import { CornerDotOptions } from "./CornerDotOptions";
+import { CornerSquareOptions } from "./CornerSquareOptions";
+import { QROptions } from "./QROptions";
 
 const qrCode = new QRCodeStyling($qrOptions.get());
 
@@ -62,12 +65,12 @@ export default function App({ lang }: PropsLang) {
       <div class="flex w-full flex-col gap-4">
         <hr class="divider" />
         <div>
-          <p>{t("qr.url")}</p>
+          <p>{t("URL")}</p>
           <input value={options.data} onChange={onUrlChange} class="input" />
         </div>
         <Slider
           id="slider-size"
-          title={t("qr.size")}
+          title={t("SIZE")}
           min="1"
           max="300"
           step="1"
@@ -79,7 +82,7 @@ export default function App({ lang }: PropsLang) {
           class="inline-block w-fit rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-900"
           data-hs-input-number=""
         >
-          <p>{t("qr.margin")}</p>
+          <p>{t("MARGIN")}</p>
           <div class="flex items-center gap-x-1.5">
             <button
               type="button"
@@ -110,29 +113,37 @@ export default function App({ lang }: PropsLang) {
             </button>
           </div>
         </div>
-        <Seccion title={t("qr.imageTitle")} size="md">
+        <Seccion title={t("IMAGETITLE")} size="md">
           <ImageOptionsSections lang={lang} />
         </Seccion>
         <Seccion
-          title={t("qr.backgroundTitle")}
+          title={t("BACKGROUNDTITLE")}
           size={options.backgroundOptions?.gradient ? "md" : "sm"}
         >
           <BackGroundSections lang={lang} />
         </Seccion>
         <Seccion
-          title={t("qr.dotsTitle")}
+          title={t("DOTSTITLE")}
           size={options.dotsOptions?.gradient ? "lg" : "sm"}
         >
           <DotOptions lang={lang} />
         </Seccion>
-
+        <Seccion title={t("CORNERSQUARETITLEOPTION")} size="xl">
+          <CornerSquareOptions lang={lang} />
+        </Seccion>
+        <Seccion title={t("CORNERDOTTITLEOPTION")} size="xl">
+          <CornerDotOptions lang={lang} />
+        </Seccion>
+        <Seccion title={t("QROPTIONSTITLE")} size="sm">
+          <QROptions lang={lang} />
+        </Seccion>
         <section class="flex flex-row gap-4">
           <button
             class="btn-solid flex flex-grow items-center justify-center text-center"
             onClick={onDownloadClick}
           >
             <Save />
-            {<span class="capitalize">{t("qr.download")}</span>}
+            {<span class="capitalize">{t("DOWNLOAD")}</span>}
           </button>
           <select
             onChange={onExtensionChange}

@@ -20,7 +20,7 @@ export const ImageOptionsSections: React.FC<PropsLang> = ({ lang }) => {
       <div class="flex flex-row items-center justify-between gap-4">
         <form class="flex">
           <label for="file-input" class="sr-only">
-            {t("qr.upload")}
+            {t("UPLOAD")}
           </label>
           <input
             type="file"
@@ -35,7 +35,7 @@ export const ImageOptionsSections: React.FC<PropsLang> = ({ lang }) => {
         {image && (
           <button class="btn-ghost" onClick={() => onFileChange(null)}>
             <Trash className="icon" />
-            {t("qr.delete")}
+            {t("DELETE")}
           </button>
         )}
       </div>
@@ -50,14 +50,12 @@ export const ImageOptionsSections: React.FC<PropsLang> = ({ lang }) => {
               checked={imageOptions?.hideBackgroundDots}
             />
             <label for="hs-default-checkbox" class="checkbox-label">
-              {imageOptions?.hideBackgroundDots
-                ? t("qr.hidedot")
-                : t("qr.showdot")}
+              {imageOptions?.hideBackgroundDots ? t("HIDEDOT") : t("SHOWDOT")}
             </label>
           </div>
           <Slider
             id="basic-range-slider-borderimage"
-            title={t("qr.border")}
+            title={t("BORDER")}
             min="0"
             max="100"
             value={imageOptions?.margin ?? 0}
@@ -66,7 +64,7 @@ export const ImageOptionsSections: React.FC<PropsLang> = ({ lang }) => {
           />
           <Slider
             id="basic-range-slider-sizeimage"
-            title={t("qr.imegesize")}
+            title={t("IMEGESIZE")}
             min={0.0}
             max={1.0}
             step={0.1}
