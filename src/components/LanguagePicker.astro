@@ -10,11 +10,7 @@ const t = useTranslations(lang);
   {
     Object.entries(languages).map(([lang, label]) => (
       <li class="flex items-center gap-2">
-        <a
-          href={`/${lang}/`}
-          class="footer-text text-blue-800 dark:text-blue-200"
-          aria-current="page"
-        >
+        <a href={`/${lang}/`} class="footer-text" aria-current="page">
           {label}
         </a>
       </li>
