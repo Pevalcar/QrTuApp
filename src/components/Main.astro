@@ -1,8 +1,8 @@
 ---
 import QRCodeGenerator from "@components/QrCodeGenerator";
-import Welcome from "@components/Welcome.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import { QrCode, Link } from "lucide-preact";
+import { Link, QrCode } from "lucide-preact";
+import UrlShorter from "./UrlShorter.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -20,6 +20,6 @@ const t = useTranslations(lang);
       <Link class="icon" />
       <h1>{t("SHORTEN")}</h1>
     </div>
-    <!-- <Welcome /> -->
+    <UrlShorter />
   </div>
 </main>
