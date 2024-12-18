@@ -2,6 +2,10 @@
 import { LoginButton } from "@components/LoginButton";
 import SwitchDarMod from "@sections/SwitchDarMod.astro";
 import { dataGlobal } from "@utils/dataGlobal";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <header class="w-full flex-col items-center justify-center py-8">

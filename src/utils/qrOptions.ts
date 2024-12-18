@@ -29,6 +29,15 @@ const updateQrCode = () => {
   $qrCode.set(new QRCodeStyling($qrOptions.get()));
 };
 
+//url
+export const onUrlChange = (event: any) => {
+  event.preventDefault();
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    data: event.target.value,
+  });
+};
+
 //Image options
 
 export const onFileChange = (event: any) => {
@@ -155,7 +164,7 @@ export const onRoundChange = (event: any) => {
   updateQrCode();
 };
 
-export const setGradiente = (color: any | undefined) => {
+export const setGradienteBg = (color: any | undefined) => {
   $qrOptions.set({
     ...$qrOptions.get(),
     backgroundOptions: {
@@ -167,6 +176,8 @@ export const setGradiente = (color: any | undefined) => {
 };
 
 export const onTypeGradeiveChange = (event: any) => {
+  console.log(event.target.value);
+
   $qrOptions.set({
     ...$qrOptions.get(),
     backgroundOptions: {
@@ -263,6 +274,140 @@ export const onRotationChange = (event: any) => {
         ],
         rotation: (Math.PI * Number(event)) / 180,
       },
+    },
+  });
+  updateQrCode();
+};
+
+//Dots options
+export const onDotTypeChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    dotsOptions: {
+      ...$qrOptions.get().dotsOptions,
+      type: event.target.value,
+    },
+  });
+  updateQrCode();
+};
+
+export const onDotColorChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    dotsOptions: {
+      ...$qrOptions.get().dotsOptions,
+      color: event.target.value,
+    },
+  });
+  updateQrCode();
+};
+
+export const onRotationDotsChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    dotsOptions: {
+      ...$qrOptions.get().dotsOptions,
+      gradient: {
+        type: $qrOptions.get().dotsOptions?.gradient?.type ?? "linear",
+        colorStops: $qrOptions.get().dotsOptions?.gradient?.colorStops ?? [
+          {
+            offset: 0,
+            color: "#ffffff",
+          },
+          {
+            offset: 100,
+            color: "red",
+          },
+        ],
+        rotation: (Math.PI * Number(event)) / 180,
+      },
+    },
+  });
+  updateQrCode();
+};
+
+export const onTipeDotsChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    dotsOptions: {
+      ...$qrOptions.get().dotsOptions,
+      gradient: {
+        ...$qrOptions.get().dotsOptions?.gradient,
+        type: event.target.value,
+        colorStops: $qrOptions.get().dotsOptions?.gradient?.colorStops ?? [
+          {
+            offset: 0,
+            color: "#ffffff",
+          },
+          {
+            offset: 100,
+            color: "onRotationChangeInput",
+          },
+        ],
+      },
+    },
+  });
+  updateQrCode();
+};
+
+export const onFirstDotsColorChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    dotsOptions: {
+      ...$qrOptions.get().dotsOptions,
+      gradient: {
+        ...$qrOptions.get().dotsOptions?.gradient,
+        type: $qrOptions.get().dotsOptions?.gradient?.type ?? "linear",
+        colorStops: [
+          {
+            offset: 0,
+            color: event.target.value,
+          },
+          {
+            offset: 1,
+            color:
+              $qrOptions.get().dotsOptions?.gradient?.colorStops[1].color ??
+              "blue",
+          },
+        ],
+      },
+    },
+  });
+  updateQrCode();
+};
+
+export const onSecondDotsColorChange = (event: any) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    dotsOptions: {
+      ...$qrOptions.get().dotsOptions,
+      gradient: {
+        ...$qrOptions.get().dotsOptions?.gradient,
+        type: $qrOptions.get().dotsOptions?.gradient?.type ?? "linear",
+        colorStops: [
+          {
+            offset: 0,
+            color:
+              $qrOptions.get().dotsOptions?.gradient?.colorStops[0].color ??
+              "blue",
+          },
+          {
+            offset: 1,
+            color: event.target.value,
+          },
+        ],
+      },
+    },
+  });
+  updateQrCode();
+};
+
+export const setGradioeDots = (color: any | undefined) => {
+  $qrOptions.set({
+    ...$qrOptions.get(),
+    dotsOptions: {
+      ...$qrOptions.get().dotsOptions,
+      gradient: color ?? undefined,
     },
   });
   updateQrCode();

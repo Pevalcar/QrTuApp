@@ -8,15 +8,19 @@ import {
 } from "@utils/qrOptions";
 import { Trash } from "lucide-preact";
 import { Slider } from "./ui/slider";
+import type { ui } from "@i18n/ui";
+import { useTranslations } from "@i18n/utils";
+import type { PropsLang } from "./QrCodeGenerator";
 
-export const ImageOptionsSections = () => {
+export const ImageOptionsSections: React.FC<PropsLang> = ({ lang }) => {
   const { image, imageOptions } = useStore($qrOptions);
+  const t = useTranslations(lang);
   return (
     <section class="options-image-section">
       <div class="flex flex-row items-center justify-between gap-4">
         <form class="flex">
           <label for="file-input" class="sr-only">
-            Choose file
+            {t("qr.upload")}
           </label>
           <input
             type="file"
@@ -24,13 +28,14 @@ export const ImageOptionsSections = () => {
             value={image ?? ""}
             name="file-input"
             id="file-input"
+            lang={lang}
             class="imput-file overflow-hidden"
           />
         </form>
         {image && (
           <button class="btn-ghost" onClick={() => onFileChange(null)}>
             <Trash className="icon" />
-            Eliminar
+            {t("qr.delete")}
           </button>
         )}
       </div>
@@ -46,13 +51,13 @@ export const ImageOptionsSections = () => {
             />
             <label for="hs-default-checkbox" class="checkbox-label">
               {imageOptions?.hideBackgroundDots
-                ? "Hide Background Dots"
-                : "Background Dots"}
+                ? t("qr.hidedot")
+                : t("qr.showdot")}
             </label>
           </div>
           <Slider
             id="basic-range-slider-borderimage"
-            title="Margen de imagen"
+            title={t("qr.border")}
             min="0"
             max="100"
             value={imageOptions?.margin ?? 0}
@@ -61,7 +66,7 @@ export const ImageOptionsSections = () => {
           />
           <Slider
             id="basic-range-slider-sizeimage"
-            title="Tamaño de la imagen"
+            title={t("qr.imegesize")}
             min={0.0}
             max={1.0}
             step={0.1}

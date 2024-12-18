@@ -5,22 +5,27 @@ import { useCallback, useState } from "preact/hooks";
 interface Props {
   children: ReactNode;
   title: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 export const Seccion: FC<Props> = ({ children, title, size }) => {
   const [show, setShow] = useState(false);
 
   const altura =
-    size === "sm" ? "h-[200px]" : size === "md" ? "h-[300px]" : "h-[400px]";
+    size === "sm"
+      ? "h-[200px]"
+      : size === "md"
+        ? "h-[300px]"
+        : size === "lg"
+          ? "h-[350px]"
+          : "h-[400px]";
 
   const handleClick = useCallback(() => {
     setShow(!show);
   }, [show]);
 
   return (
-    <div class="w-full">
-      <hr class="divider" />
+    <div class="w-full rounded-md border border-blue-500 p-4 dark:border-neutral-700 dark:bg-neutral-900">
       <div class="flex flex-row items-center justify-between gap-4">
         <h3 class="subtitle">{title}</h3>
         <button class="btn-ghost" onClick={() => handleClick()}>
@@ -41,7 +46,6 @@ export const Seccion: FC<Props> = ({ children, title, size }) => {
       >
         {children}
       </div>
-      <hr class="divider" />
     </div>
   );
 };

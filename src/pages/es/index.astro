@@ -1,0 +1,16 @@
+---
+import Header from "@components/Header.astro";
+import Main from "@components/Main.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import Layout from "@layouts/Layout.astro";
+import { dataGlobal } from "@utils/dataGlobal";
+
+const { THEME_COLOR } = dataGlobal;
+const lag = getLangFromUrl(Astro.url);
+const t = useTranslations(lag);
+---
+
+<Layout title={`${t("TITLE")}`} themeColor={`${THEME_COLOR}`}>
+  <Header />
+  <Main />
+</Layout>

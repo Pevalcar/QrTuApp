@@ -1,0 +1,23 @@
+---
+import { languages } from "@i18n/ui";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<ul class="flex flex-col gap-2 text-sm">
+  {
+    Object.entries(languages).map(([lang, label]) => (
+      <li class="flex items-center gap-2">
+        <a
+          href={`/${lang}/`}
+          class="font-bold text-gray-900 hover:text-gray-700"
+          aria-current="page"
+        >
+          {label}
+        </a>
+      </li>
+    ))
+  }
+</ul>

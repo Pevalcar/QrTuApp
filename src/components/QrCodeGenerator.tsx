@@ -6,29 +6,31 @@ import {
   onMarginChange,
   onMarginInputChange,
   onSizeChange,
+  onUrlChange,
 } from "@utils/qrOptions";
 import { Minus, PlusIcon, Save } from "lucide-preact";
 import { useCallback, useEffect, useRef, useState } from "preact/hooks";
-import QRCodeStyling, {
-  type DotType,
-  type FileExtension,
-} from "qr-code-styling";
+import QRCodeStyling, { type FileExtension } from "qr-code-styling";
 import { BackGroundSections } from "./BackGroundSections";
+import { DotOptions } from "./DotsOptions";
 import { ImageOptionsSections } from "./ImageOptionsSections";
 import { Seccion } from "./Section";
 import { Slider } from "./ui/slider";
 
+import type { ui } from "@i18n/ui";
+import { useTranslations } from "../i18n/utils";
+
 const qrCode = new QRCodeStyling($qrOptions.get());
 
-export default function App() {
+export interface PropsLang {
+  lang: keyof typeof ui;
+}
+
+export default function App({ lang }: PropsLang) {
   const [fileExt, setFileExt] = useState<FileExtension>("webp");
-  const [dotType, setDotType] = useState<DotType>("classy");
-  const [colorDot, setColorDot] = useState("#333333");
-  const [colorBg, setColorBg] = useState("#FFFFFF");
-  const [margin, setMargin] = useState(0);
-  const [size, setSize] = useState(200);
   const ref = useRef<HTMLDivElement | null>(null);
   const options = useStore($qrOptions);
+  const t = useTranslations(lang);
 
   useEffect(() => {
     if (ref.current) {
@@ -40,29 +42,9 @@ export default function App() {
     qrCode.update(options);
   }, [options]);
 
-  const onUrlChange = useCallback((event: any) => {
-    event.preventDefault();
-    $qrOptions.set({
-      ...$qrOptions.get(),
-      data: event.target.value,
-    });
-  }, []);
-
   const onExtensionChange = useCallback((event: any) => {
     event.preventDefault();
     setFileExt(event.target.value);
-  }, []);
-
-  const onDotTypeChange = useCallback((event: any) => {
-    setDotType(event.target.value);
-  }, []);
-
-  const onColorBgChange = useCallback((event: any) => {
-    setColorBg(event.target.value);
-  }, []);
-
-  const onColorDotChange = useCallback((event: any) => {
-    setColorDot(event.target.value);
   }, []);
 
   const onDownloadClick = useCallback(() => {
@@ -77,12 +59,15 @@ export default function App() {
         <div ref={ref} class="qr-code-view" />
       </div>
 
-      <div class="w-full">
+      <div class="flex w-full flex-col gap-4">
         <hr class="divider" />
-        <input value={options.data} onChange={onUrlChange} class="input" />
+        <div>
+          <p>{t("qr.url")}</p>
+          <input value={options.data} onChange={onUrlChange} class="input" />
+        </div>
         <Slider
           id="slider-size"
-          title="Tamaño"
+          title={t("qr.size")}
           min="1"
           max="300"
           step="1"
@@ -94,7 +79,7 @@ export default function App() {
           class="inline-block w-fit rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-900"
           data-hs-input-number=""
         >
-          <p>Margen</p>
+          <p>{t("qr.margin")}</p>
           <div class="flex items-center gap-x-1.5">
             <button
               type="button"
@@ -125,37 +110,20 @@ export default function App() {
             </button>
           </div>
         </div>
-        <Seccion title="IMAGEN" size="md">
-          <ImageOptionsSections />
+        <Seccion title={t("qr.imageTitle")} size="md">
+          <ImageOptionsSections lang={lang} />
         </Seccion>
         <Seccion
-          title="BACKGROUND"
+          title={t("qr.backgroundTitle")}
           size={options.backgroundOptions?.gradient ? "md" : "sm"}
         >
-          <BackGroundSections />
+          <BackGroundSections lang={lang} />
         </Seccion>
-        <Seccion title="PUNTOS" size="sm">
-          <div>
-            <select
-              onChange={onDotTypeChange}
-              value={dotType}
-              class="select-drop-down"
-            >
-              {/* creacr iconos yque sea un selector multiple donde tenga el ejemplo a el lado dew cada uno de los iconos */}
-              <option value="dot">Dot</option>
-              <option value="rounded">Rounded</option>
-              <option value="classy">Classy</option>
-              <option value="classy-rounded">Classy Rounded</option>
-              <option value="square">Square</option>
-              <option value="extra-rounded">Extra Rounded</option>
-            </select>
-          </div>
-          <input
-            value={colorDot}
-            onChange={onColorDotChange}
-            style={styles.inputBox}
-            type="color"
-          />
+        <Seccion
+          title={t("qr.dotsTitle")}
+          size={options.dotsOptions?.gradient ? "lg" : "sm"}
+        >
+          <DotOptions lang={lang} />
         </Seccion>
 
         <section class="flex flex-row gap-4">
@@ -164,7 +132,7 @@ export default function App() {
             onClick={onDownloadClick}
           >
             <Save />
-            Download
+            {<span class="capitalize">{t("qr.download")}</span>}
           </button>
           <select
             onChange={onExtensionChange}
@@ -181,16 +149,3 @@ export default function App() {
     </div>
   );
 }
-
-const styles = {
-  inputWrapper: {
-    margin: "20px 0",
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-  },
-  inputBox: {
-    flexGrow: 1,
-    marginRight: 20,
-  },
-};

@@ -1,21 +1,24 @@
 ---
 import QRCodeGenerator from "@components/QrCodeGenerator";
 import Welcome from "@components/Welcome.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { QrCode, Link } from "lucide-preact";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <main class="main">
   <div class="main-card">
     <div class="card-header">
       <QrCode class="icon" />
-      <h1>Generate QR Code</h1>
+      <h1>{t("qr.title")}</h1>
     </div>
-    <QRCodeGenerator client:only="preact" />
+    <QRCodeGenerator client:only="preact" lang={lang} />
   </div>
   <div class="main-card">
     <div class="card-header">
       <Link class="icon" />
-      <h1>Shorten URL</h1>
+      <h1>{t("qr.shorten")}</h1>
     </div>
     <!-- <Welcome /> -->
   </div>
