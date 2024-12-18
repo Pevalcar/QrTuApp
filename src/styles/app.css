@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply h-auto w-auto bg-gradient-to-br from-blue-500 to-blue-200 p-6 dark:from-blue-900 dark:to-blue-800;
+  @apply h-full w-full bg-gradient-to-br from-blue-500 to-blue-200 p-6 dark:from-blue-900 dark:to-blue-800;
 }
 
 .input {
@@ -45,11 +45,11 @@ p {
 }
 
 .main {
-  @apply h-full w-full flex-col items-center justify-center gap-4;
+  @apply flex h-full w-full flex-col items-center justify-center gap-4;
 }
 
 .main-card {
-  @apply flex flex-col rounded-xl border bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-neutral-700/70 md:p-5;
+  @apply flex max-w-[90%] flex-col rounded-xl border bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-neutral-700/70 md:p-5;
 }
 .icon {
   @apply inline-flex items-center justify-center rounded-full text-blue-600 dark:text-blue-300;
@@ -59,7 +59,7 @@ p {
 }
 
 .qr-code-container {
-  @apply container mx-auto flex columns-2 items-center justify-center gap-4 p-8 sm:flex-col md:flex-col lg:flex-row;
+  @apply container mx-auto flex w-full columns-2 items-center justify-center gap-4 p-8 sm:flex-col md:flex-col lg:flex-row;
 }
 
 .qr-code-view {
