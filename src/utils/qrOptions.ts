@@ -3,7 +3,7 @@ import { log } from "node_modules/astro/dist/core/logger/core";
 import QRCodeStyling, { type Options, type TypeNumber } from "qr-code-styling";
 
 export const $qrOptions = atom<Options>({
-  data: "https://qr-code-styling.com",
+  data: "https://qrtuapp.netlify.app/en/",
   width: 300,
   height: 300,
   margin: 0,
