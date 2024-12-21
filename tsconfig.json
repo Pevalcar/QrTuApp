@@ -15,7 +15,9 @@
       "@assets/*": ["src/assets/*"],
       "@utils/*": ["src/utils/*"],
       "@sections/*": ["src/sections/*"],
-      "@i18n/*": ["src/i18n/*"]
+      "@i18n/*": ["src/i18n/*"],
+      "@env": ["src/env.d.ts"],
+      "@lib/*": ["src/lib/*"]
     }
   }
 }

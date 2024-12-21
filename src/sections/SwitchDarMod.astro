@@ -1,7 +1,11 @@
+---
+const theme = "dark";
+---
+
 <button
   id="themeToggle"
   type="button"
-  class="hs-dark-mode dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 text-gray-800 block rounded-full font-medium hover:bg-gray-200 focus:bg-gray-200 focus:outline-none hs-dark-mode-active:hidden"
+  class="hs-dark-mode block rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none hs-dark-mode-active:hidden dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
   data-hs-theme-click-value="dark"
 >
   <span class="group inline-flex size-9 shrink-0 items-center justify-center">
@@ -24,7 +28,7 @@
 <button
   id="themeToggle2"
   type="button"
-  class="hs-dark-mode dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 text-gray-800 hidden rounded-full font-medium hover:bg-gray-200 focus:bg-gray-200 focus:outline-none hs-dark-mode-active:block"
+  class="hs-dark-mode hidden rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none hs-dark-mode-active:block dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
   data-hs-theme-click-value="light"
 >
   <span class="group inline-flex size-9 shrink-0 items-center justify-center">
@@ -53,26 +57,42 @@
   </span>
 </button>
 
-<script is:inline>
+<script is:inline define:vars={{ theme }}>
   const handleToggleClick = () => {
-    const html = document.querySelector("html");
-    const isLightOrAuto =
-      window.localStorage.getItem("hs_theme") === "light" ||
-      (window.localStorage.getItem("hs_theme") === "auto" &&
-        !window.matchMedia("(prefers-color-scheme: dark)").matches);
-    const isDarkOrAuto =
-      window.localStorage.getItem("hs_theme") === "dark" ||
-      (window.localStorage.getItem("hs_theme") === "auto" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // const html = document.querySelector("html");
+    // const isLightOrAuto =
+    //   window.localStorage.getItem("hs_theme") === "light" ||
+    //   (window.localStorage.getItem("hs_theme") === "auto" &&
+    //     !window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // const isDarkOrAuto =
+    //   window.localStorage.getItem("hs_theme") === "dark" ||
+    //   (window.localStorage.getItem("hs_theme") === "auto" &&
+    //     window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-    if (isLightOrAuto && html.classList.contains("dark"))
-      html.classList.remove("dark");
-    else if (isDarkOrAuto && html.classList.contains("light"))
-      html.classList.remove("light");
-    else if (isDarkOrAuto && !html.classList.contains("dark"))
-      html.classList.add("dark");
-    else if (isLightOrAuto && !html.classList.contains("light"))
-      html.classList.add("light");
+    // if (isLightOrAuto && html.classList.contains("dark"))
+    //   html.classList.remove("dark");
+    // else if (isDarkOrAuto && html.classList.contains("light"))
+    //   html.classList.remove("light");
+    // else if (isDarkOrAuto && !html.classList.contains("dark"))
+    //   html.classList.add("dark");
+    // else if (isLightOrAuto && !html.classList.contains("light"))
+    //   html.classList.add("light");
+
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches),
+    );
+
+    // Whenever the user explicitly chooses light mode
+    localStorage.theme = "light";
+
+    // Whenever the user explicitly chooses dark mode
+    localStorage.theme = "dark";
+
+    // Whenever the user explicitly chooses to respect the OS preference
+    localStorage.removeItem("theme");
   };
 
   document

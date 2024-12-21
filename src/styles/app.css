@@ -3,15 +3,21 @@
 @tailwind utilities;
 
 body {
-  @apply h-full w-full bg-gradient-to-br from-blue-500 to-blue-200 p-6 dark:from-blue-900 dark:to-blue-800;
+  @apply h-full w-full bg-gradient-to-b from-blue-400 to-white transition-colors duration-300 dark:from-gray-900 dark:to-gray-800 dark:text-white;
 }
 
+header {
+  @apply container mx-auto flex w-full flex-wrap items-center justify-between px-4 py-4;
+}
+nav {
+  @apply mx-auto flex w-full max-w-[85rem] basis-full flex-wrap items-center justify-between px-4;
+}
 .input {
   @apply block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600;
 }
 
 footer {
-  @apply w-full flex-col items-center justify-center bg-blue-500 bg-gradient-to-r py-8;
+  @apply flex w-full flex-wrap bg-white py-3 text-sm dark:bg-neutral-800 sm:flex-nowrap sm:justify-start;
 }
 p {
   @apply text-blue-500 dark:text-blue-200;
@@ -44,12 +50,12 @@ p {
   @apply flex items-center justify-center rounded-full bg-purple-50 px-4 py-2 text-2xl text-blue-500;
 }
 
-.main {
-  @apply flex h-full w-full flex-col items-center justify-center gap-4;
+main {
+  @apply container mx-auto flex min-h-screen w-full flex-1 flex-col items-center justify-center gap-4;
 }
 
 .main-card {
-  @apply flex max-w-[90%] flex-col rounded-xl border bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-neutral-700/70 md:p-5;
+  @apply flex w-full max-w-[90%] flex-col rounded-xl border bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-neutral-700/70 md:p-5;
 }
 .icon {
   @apply inline-flex items-center justify-center rounded-full text-blue-600 dark:text-blue-300;
@@ -59,7 +65,7 @@ p {
 }
 
 .qr-code-container {
-  @apply container mx-auto flex w-full columns-2 items-center justify-center gap-4 p-8 sm:flex-col md:flex-col lg:flex-row;
+  @apply container mx-auto flex w-full columns-2 flex-col items-center justify-center gap-4 p-8 sm:flex-col md:flex-col lg:flex-row;
 }
 
 .qr-code-view {
@@ -122,4 +128,12 @@ p {
 
 .btn-icon {
   @apply inline-flex size-6 items-center justify-center gap-x-2 rounded-md border border-gray-200 bg-white text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800;
+}
+
+.menu-open {
+  @apply w-64;
+}
+
+.menu-close {
+  @apply w-0;
 }
