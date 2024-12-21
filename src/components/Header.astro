@@ -6,7 +6,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { supabase } from "../lib/supabase";
 import { Image } from "astro:assets";
 import astro from "@assets/astro.svg";
-import { MenuIcon, X, Link } from "lucide-preact";
+import { MenuIcon, X, Link, QrCode } from "lucide-preact";
 
 const { cookies, url } = Astro;
 
@@ -54,11 +54,8 @@ const t = useTranslations(lang);
       >
     </div>
     <div class="hidden items-center gap-4 space-x-4 md:flex">
-      <a
-        class="font-medium text-gray-600 hover:text-gray-400 focus:text-gray-400 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-500"
-        href="/en/">{"Shortener"}</a
-      >
-      <a href="/en/QrGenerator">{"QRGenerator"}</a>
+      <a class="nav-item" href=`/${lang}/`>{"Shortener"}</a>
+      <a class="nav-item" href=`/${lang}/QrGenerator`>{"QRGenerator"}</a>
     </div>
     <div class="flex items-center gap-4 space-x-4">
       <SwitchDarMod />
@@ -92,27 +89,28 @@ const t = useTranslations(lang);
       data-hs-accordion-always-open
     >
       <ul class="space-y-1.5">
-        <li>
-          <a
-            class={"flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-neutral-700 dark:text-white " +
-              (isMain ? "bg-gray-100" : "")}
-            href="/"
-          >
+        <li
+          class={"items-center gap-x-3.5 flex flex-row w-full rounded-lg px-2.5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-neutral-700 dark:text-white " +
+            (isMain ? "bg-gray-100" : "")}
+        >
+          <a href="/" class="flex flex-row items-center gap-x-3.5">
             <Link />
             UrlShorter
           </a>
         </li>
-        <li>
+        <li
+          class={"items-center gap-x-3.5 flex flex-row w-50 rounded-lg px-2.5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-neutral-700 dark:text-white " +
+            url.pathname ===
+            "/es/QrGenerator" || url.pathname === "/en/QrGenerator"
+            ? "bg-gray-100"
+            : ""}
+        >
           <a
-            class={"flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-neutral-700 dark:text-white " +
-              url.pathname ===
-              "/es/QrGenerator" || url.pathname === "/en/QrGenerator"
-              ? "bg-gray-100"
-              : ""}
-            href="/QrGenerator"
+            href=`/${lang}/QrGenerator`
+            class="flex flex-row items-center gap-x-3.5"
           >
-            <Link />
-            UrlShorter
+            <QrCode />
+            {"QRGenerator"}
           </a>
         </li>
       </ul>

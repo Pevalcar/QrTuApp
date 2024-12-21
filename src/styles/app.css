@@ -131,9 +131,13 @@ main {
 }
 
 .menu-open {
-  @apply w-64;
+  @apply w-72;
 }
 
 .menu-close {
   @apply w-0;
+}
+
+.nav-item {
+  @apply font-bold text-blue-600 hover:text-blue-400 focus:text-blue-400 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-500;
 }
