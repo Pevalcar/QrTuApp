@@ -9,7 +9,7 @@ export function GET(context) {
     description: dataGlobal.description,
     // Usa el "site" desde el contexto del endpoint
     // https://docs.astro.build/en/reference/api-reference/#contextsite
-    site: context.site,
+    site: context.site ?? "https://qrtuapp.netlify.app/en/",
     // Array de `<item>`s en el xml generado
     // Consulta la sección "Generando `items`" para ejemplos utilizando colecciones de contenido y glob imports
     items: [],
