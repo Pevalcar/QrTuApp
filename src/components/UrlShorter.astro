@@ -1,5 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { Scissors, QrCode, Link } from "lucide-preact";
+
 import Title from "./ui/Title.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,62 +13,69 @@ const t = useTranslations(lang);
   <section class="main-card">
     <div class="items-center justify-center text-center">
       <div class="card-header items-center justify-center">
-        <h1>{t("SHORTEN")}</h1>
+        <h1>{t("SH-TITLEHEADER")}</h1>
       </div>
-      <p>pega el url aqui y optene una url corta al instante</p>
+      <p>{t("SH-DESC")}</p>
     </div>
     {/* URL Shortener Form */}
-    <div class="mx-auto max-w-2xl">
-      <form class="flex gap-2">
-        <input type="url" placeholder="https://tu-url-larga.com" required />
-        <!-- <button type="submit">{t.shorten}</button> -->
+    <div class="mx-auto mt-8 w-full max-w-2xl">
+      <form class="flex w-full gap-2">
+        <input
+          type="url"
+          class="input w-full flex-1 flex-grow"
+          placeholder={t("URL-PLACEHOLDER")}
+          required
+        />
+        <button class="btn-solid">{t("URL-BTN")}</button>
       </form>
-      <!-- {shortenedUrl && (
-                <div class="mt-4">
-                  <p class="font-semibold">{t.yourShortUrl}</p>
-                  <a href={shortenedUrl} target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">
-                    {shortenedUrl}
-                  </a>
-                </div>
-              )} -->
     </div>
   </section>
 
   {/* Features Section */}
-  <section class="mb-16 grid gap-8 md:grid-cols-3">
-    <div>
-      <div>
-        <article class="mb-2 h-10 w-10 text-blue-500"></article>
-        <!-- <div>{t.urlShortener}</div> -->
+  <section class="mb-16 grid grid-cols-1 gap-8 px-5 md:grid-cols-3">
+    <div class="shorten-card">
+      <div class="shorten-card-header">
+        <Scissors class="mb-2 h-10 w-10 text-blue-500" />
+        <h3 class="mb-2 text-2xl font-bold">
+          {t("SHORTEN-TITLE")}
+        </h3>
       </div>
       <div>
-        <!-- <p>{t.urlShortenerDesc}</p> -->
-      </div>
-    </div>
-    <div>
-      <div>
-        <!-- <QrCode class="w-10 h-10 text-blue-500 mb-2" /> -->
-        <!-- <div>{t.qrGenerator}</div> -->
-      </div>
-      <div>
-        <!-- <p>{t.qrGeneratorDesc}</p> -->
+        <p>{t("SHORTEN-DESC")}</p>
       </div>
     </div>
-    <div>
-      <div>
-        <link class="mb-2 h-10 w-10 text-blue-500" />
-        <!-- <div>{t.customLinks}</div> -->
+    <a href={"/" + lang + "/QrGenerator"} class="shorten-card">
+      <div class="shorten-card-header">
+        <QrCode class="mb-2 h-10 w-10 text-blue-500" />
+        <h3 class="mb-2 text-2xl font-bold">
+          {t("QRGENERATOR-TITLE")}
+        </h3>
       </div>
       <div>
-        <!-- <p>{t.customLinksDesc}</p> -->
+        <p>{t("QR-DESC")}</p>
+      </div>
+    </a>
+    <div class="shorten-card">
+      <div class="shorten-card-header">
+        <Link class="mb-2 h-10 w-10 text-blue-500" />
+        <h3 class="mb-2 text-2xl font-bold">
+          {t("LINK-TITLE")}
+        </h3>
+      </div>
+      <div>
+        <p>{t("LINK-DESC")}</p>
       </div>
     </div>
   </section>
 
   {/* CTA Section */}
-  <section class="text-center">
-    <!-- <h2 class="text-3xl font-bold mb-4">{t.ctaTitle}</h2> -->
-    <!-- <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">{t.ctaDescription}</p> -->
-    <!-- <Button size="lg">{t.createAccount}</Button> -->
+  <section class="pb-20 text-center">
+    <h2 class="mb-4 text-3xl font-bold">
+      {t("CTA-TITLE")}
+    </h2>
+    <p class="mb-8 text-xl text-gray-600 dark:text-gray-300">
+      {t("CTA-DESC")}
+    </p>
+    <buttom class="btn-solid">{t("CTA-BTN")}</buttom>
   </section>
 </main>

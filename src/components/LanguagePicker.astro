@@ -2,18 +2,18 @@
 import { languages } from "@i18n/ui";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
+import { Globe } from "lucide-preact";
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const nextLang = lang === "en" ? "es" : "en";
 ---
 
-<ul class="flex flex-col gap-2 text-sm">
-  {
-    Object.entries(languages).map(([lang, label]) => (
-      <li class="flex items-center gap-2">
-        <a href={`/${lang}/`} class="footer-text" aria-current="page">
-          {label}
-        </a>
-      </li>
-    ))
-  }
-</ul>
+<a
+  href={"/" + nextLang}
+  class="nav-item flex border-spacing-1 flex-row gap-2 rounded-sm border border-transparent px-4 py-3 text-sm font-medium text-blue-600 hover:bg-blue-100 hover:text-blue-800 focus:bg-blue-100 focus:text-blue-800 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-blue-500 dark:hover:bg-blue-800/30 dark:hover:text-blue-400 dark:focus:bg-blue-800/30 dark:focus:text-blue-400"
+>
+  <Globe class="h-5 w-5" />
+  <p>{nextLang}</p>
+</a>
