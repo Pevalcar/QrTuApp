@@ -33,27 +33,18 @@ const t = useTranslations(lang);
 <header
   class="container mx-auto flex flex-wrap items-center justify-between px-4 py-4"
 >
-  <nav class="flex items-center space-x-4">
+  <nav
+    class="flex flex-row items-center gap-4 space-x-4 sm:flex-row md:flex-row lg:flex-row"
+  >
     <div
       class="flex flex-row items-center gap-4 text-2xl font-bold text-blue-800 dark:text-blue-100"
     >
-      <div
-        class="items-center justify-center gap-4 space-x-4 md:hidden lg:hidden"
-      >
-        <button
-          id="menuButton"
-          class="btn-icon h-full items-center justify-center gap-x-2 rounded-md border border-gray-200 bg-white text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-          aria-label="Toggle menu"
-        >
-          <MenuIcon />
-        </button>
-      </div>
       <a class="flex items-center gap-x-2" href="/">
         <Image src={icon} alt="logo" width="50" height="50" />
         {dataGlobal.title}</a
       >
     </div>
-    <div class="hidden items-center gap-4 space-x-4 md:flex">
+    <div class="items-center gap-4 space-x-4 md:flex">
       <a class="nav-item" href=`/${lang}/`>{"Shortener"}</a>
       <a class="nav-item" href=`/${lang}/QrGenerator`>{"QRGenerator"}</a>
     </div>
@@ -62,84 +53,4 @@ const t = useTranslations(lang);
       <LoginButton client:load />
     </div>
   </nav>
-  <!-- <h1>Bienvenido {email}</h1>
-  <h1>Estamos felices de verte aquí</h1>
-  <form action="/api/auth/signout">
-    <button type="submit">Cerrar sesión</button>
-  </form> -->
-  <div
-    id="hs-offcanvas-example"
-    class="hs-overlay menu-close fixed bottom-0 end-auto start-0 top-0 z-[60] block translate-x-0 transform overflow-y-auto border-e border-gray-200 bg-white pb-10 pt-7 transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 dark:border-neutral-700 dark:bg-neutral-800 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 [&::-webkit-scrollbar]:w-2"
-    role="dialog"
-    tabindex="-1"
-    aria-label="Sidebar"
-  >
-    <div class="flex w-full flex-row items-center justify-between px-6">
-      <a
-        class="flex text-xl font-semibold text-black focus:opacity-80 focus:outline-none dark:text-white"
-        href="#"
-        aria-label="Brand">{dataGlobal.title}</a
-      >
-      <button id="menuButton2" class="btn-icon" aria-label="Toggle menu">
-        <X />
-      </button>
-    </div>
-    <nav
-      class="hs-accordion-group flex w-full flex-col flex-wrap p-6"
-      data-hs-accordion-always-open
-    >
-      <ul class="space-y-1.5">
-        <li
-          class={"items-center gap-x-3.5 flex flex-row w-full rounded-lg px-2.5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-neutral-700 dark:text-white " +
-            (isMain ? "bg-gray-100" : "")}
-        >
-          <a href="/" class="flex flex-row items-center gap-x-3.5">
-            <Link />
-            UrlShorter
-          </a>
-        </li>
-        <li
-          class={"items-center gap-x-3.5 flex flex-row w-50 rounded-lg px-2.5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-neutral-700 dark:text-white " +
-            url.pathname ===
-            "/es/QrGenerator" || url.pathname === "/en/QrGenerator"
-            ? "bg-gray-100"
-            : ""}
-        >
-          <a
-            href=`/${lang}/QrGenerator`
-            class="flex flex-row items-center gap-x-3.5"
-          >
-            <QrCode />
-            {"QRGenerator"}
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
 </header>
-
-<script is:inline>
-  const menuButton = document.getElementById("menuButton");
-  const menuButton2 = document.getElementById("menuButton2");
-
-  menuButton2.addEventListener("click", () => {
-    const menu = document.getElementById("hs-offcanvas-example");
-    if (menu.classList.contains("menu-open")) {
-      menu.classList.remove("menu-open");
-      menu.classList.add("menu-close");
-      return;
-    }
-    menu.classList.remove("menu-close");
-    menu.classList.add("menu-open");
-  });
-  menuButton.addEventListener("click", () => {
-    const menu = document.getElementById("hs-offcanvas-example");
-    if (menu.classList.contains("menu-open")) {
-      menu.classList.remove("menu-open");
-      menu.classList.add("menu-close");
-      return;
-    }
-    menu.classList.remove("menu-close");
-    menu.classList.add("menu-open");
-  });
-</script>
