@@ -1,12 +1,11 @@
 ---
+import icon from "@assets/icon.svg";
 import { LoginButton } from "@components/LoginButton";
 import SwitchDarMod from "@sections/SwitchDarMod.astro";
 import { dataGlobal } from "@utils/dataGlobal";
+import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { supabase } from "../lib/supabase";
-import { Image } from "astro:assets";
-import icon from "@assets/icon.svg";
-import { MenuIcon, X, Link, QrCode } from "lucide-preact";
 
 const { cookies, url } = Astro;
 

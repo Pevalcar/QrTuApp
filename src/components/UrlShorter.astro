@@ -1,6 +1,8 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { Scissors, QrCode, Link } from "lucide-preact";
+import { UrlInput } from "@sections/UrlInput";
+import { Table } from "@sections/Table";
 
 import Title from "./ui/Title.astro";
 const lang = getLangFromUrl(Astro.url);
@@ -10,7 +12,9 @@ const t = useTranslations(lang);
 <main class="main">
   {/* Hero Section */}
   <Title />
-  <section class="main-card">
+  <section
+    class="mb-16 flex w-full max-w-[80%] flex-col items-center justify-center gap-4 rounded-md bg-white p-8 shadow-sm dark:bg-neutral-800 sm:gap-0 lg:max-w-[60%]"
+  >
     <div class="items-center justify-center text-center">
       <div class="card-header items-center justify-center">
         <h1>{t("SH-TITLEHEADER")}</h1>
@@ -18,18 +22,11 @@ const t = useTranslations(lang);
       <p>{t("SH-DESC")}</p>
     </div>
     {/* URL Shortener Form */}
-    <div class="mx-auto mt-8 w-full max-w-2xl">
-      <form class="flex w-full gap-2">
-        <input
-          type="url"
-          class="input w-full flex-1 flex-grow"
-          placeholder={t("URL-PLACEHOLDER")}
-          required
-        />
-        <button class="btn-solid">{t("URL-BTN")}</button>
-      </form>
+    <div class="mx-auto mt-8 w-full">
+      <UrlInput lang={lang} client:only="preact" />
     </div>
   </section>
+  <Table client:only="preact" />
 
   {/* Features Section */}
   <section class="mb-16 grid grid-cols-1 gap-8 px-5 md:grid-cols-3">
