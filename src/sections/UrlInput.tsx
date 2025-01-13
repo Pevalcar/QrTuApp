@@ -29,7 +29,7 @@ export const UrlInput: FC<Props> = ({ lang }) => {
     const data = await response.json();
 
     if (data.message) {
-      setRequest(data.data);
+      setRequest(data.message);
     }
     setLoading(false);
   };

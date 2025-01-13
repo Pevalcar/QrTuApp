@@ -10,3 +10,12 @@ interface ImportMeta {
 }
 
 export type langs = keyof typeof ui;
+
+export interface urls {
+  id: number;
+  created_at: string;
+  user_id: string;
+  url_seed: string;
+  url_gen: string;
+  views: number;
+}

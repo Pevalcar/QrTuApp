@@ -19,8 +19,6 @@ export const verifyShortUrlisOcupied = async (shortUrl: string) => {
   return false;
 };
 
-export const generateShortUrl = async (url: string) => {
-  const shortUrl = `${dataGlobal.URLPAGE}${Math.random().toString(36).substring(2, 15)}`;
-
-  return shortUrl;
+export const generateShortUrl = (url: string) => {
+  return `${dataGlobal.URLPAGE}${Math.random().toString(36).substring(2, 15)}`;
 };

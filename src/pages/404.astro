@@ -1,5 +1,11 @@
 ---
 import Layout from "@layouts/Layout.astro";
+
+if (Astro.url.pathname.length === 11) {
+  //redireccion a la url de la app
+  // console.log("es un link shroter");
+  // return Astro.redirect("/en/QrGenerator");
+}
 ---
 
 <Layout title="404 - Page Not Found">
