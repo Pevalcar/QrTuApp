@@ -1,41 +1,35 @@
 export const prerender = false;
 
-import { supabase } from "@lib/supabase";
+import {
+  generateShortUrl,
+  verifyShortUrlisOcupied,
+} from "@lib/shorters/shroter";
 import type { APIRoute } from "astro";
-import { log } from "node_modules/astro/dist/core/logger/core";
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const POST: APIRoute = async ({ request, cookies }) => {
+  const formData = await request.formData();
+  const url = formData.get("url");
 
-export const POST: APIRoute = async ({ request }) => {
-  //   const formData = await request.formData();
-  //   const url = formData.get("url")?.toString();
+  if (!url)
+    return new Response(JSON.stringify({ message: "URL obligatorio" }), {
+      status: 400,
+    });
 
-  await delay(5000);
+  const urOcuped = await verifyShortUrlisOcupied(url.toString());
+
+  if (urOcuped) {
+    return new Response(JSON.stringify({ message: "URL ya existe" }), {
+      status: 400,
+    });
+  }
+
+  const urlShort = await generateShortUrl(url.toString());
 
   return new Response(
     JSON.stringify({
       message: "URL creada",
-      data: "cosas",
+      data: urlShort,
     }),
     { status: 200 },
   );
 };
-//   const { data, error } = await supabase.from("urls").insert({
-//     url,
-//   });
-//   if (error) {
-//     return new Response(
-//       JSON.stringify({
-//         message: error.message,
-//       }),
-//       { status: 500 },
-//     );
-//   }
-//   return new Response(
-//     JSON.stringify({
-//       message: "URL creada",
-//       data,
-//     }),
-//     { status: 200 },
-//   );
-// };

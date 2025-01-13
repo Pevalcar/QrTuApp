@@ -1,7 +1,8 @@
 import type { langs } from "@env";
-import { languages, ui } from "@i18n/ui";
 import { useTranslations } from "@i18n/utils";
-import { useCallback, useState, type FC } from "preact/compat";
+import { useStore } from "@nanostores/preact";
+import { $userInfo } from "@utils/userInfo";
+import { useState, type FC } from "preact/compat";
 
 interface Props {
   lang: langs;
@@ -9,6 +10,8 @@ interface Props {
 
 export const UrlInput: FC<Props> = ({ lang }) => {
   const t = useTranslations(lang);
+  const user = useStore($userInfo);
+
   const [url, setUrl] = useState("");
   const [request, setRequest] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,15 +19,21 @@ export const UrlInput: FC<Props> = ({ lang }) => {
   const Suibmid = async (e: Event) => {
     e.preventDefault();
     setLoading(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+
     const response = await fetch(`/api/urlshorter`, {
       method: "POST",
-      body: JSON.stringify({ url }),
+      body: formData,
     });
 
     const data = await response.json();
+
+    if (data.message) {
+      setRequest(data.data);
+    }
     setLoading(false);
-    setRequest(data.message);
   };
+
   const onUrlChgane = (e: Event) => {
     e.preventDefault();
     const target = e.target as HTMLInputElement;
@@ -37,12 +46,14 @@ export const UrlInput: FC<Props> = ({ lang }) => {
         <input
           onChange={onUrlChgane}
           type="url"
+          id="url"
+          name="url"
           class="input w-full flex-1 flex-grow"
           placeholder={t("URL-PLACEHOLDER")}
           value={url}
           required
         />
-        <button onClick={Suibmid} class="btn-solid">
+        <button type={"submit"} class="btn-solid">
           {t("URL-BTN")}
         </button>
       </form>

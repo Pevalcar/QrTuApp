@@ -1,5 +1,4 @@
 import { atom } from "nanostores";
-import { log } from "node_modules/astro/dist/core/logger/core";
 import QRCodeStyling, { type Options, type TypeNumber } from "qr-code-styling";
 
 export const $qrOptions = atom<Options>({

@@ -1,9 +1,8 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import { Scissors, QrCode, Link } from "lucide-preact";
-import { UrlInput } from "@sections/UrlInput";
 import { Table } from "@sections/Table";
-
+import { UrlInput } from "@sections/UrlInput";
+import { Link, QrCode, Scissors } from "lucide-preact";
 import Title from "./ui/Title.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -23,7 +22,7 @@ const t = useTranslations(lang);
     </div>
     {/* URL Shortener Form */}
     <div class="mx-auto mt-8 w-full">
-      <UrlInput lang={lang} client:only="preact" />
+      <UrlInput lang={lang} client:load />
     </div>
   </section>
   <Table client:only="preact" />
